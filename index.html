@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Automation</title>
+</head>
+<body>
+    <h1>Home Automation System</h1>
+    <button id="toggleDevice">Toggle Device</button>
+    <p id="deviceStatus">Device is OFF</p>
+
+    <script>
+        const toggleButton = document.getElementById('toggleDevice');
+        const statusText = document.getElementById('deviceStatus');
+
+        // Event listener for the toggle button
+        toggleButton.addEventListener('click', () => {
+            // Send a request to the server to toggle the device status
+            fetch('/toggle-device')
+                .then(response => response.json())
+                .then(data => {
+                    // Update the status text based on the server's response
+                    statusText.textContent = data.status; // Display the returned status
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
